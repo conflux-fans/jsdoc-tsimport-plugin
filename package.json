@@ -1,5 +1,5 @@
 {
-  "name": "jsdoc-tsimport-plugin",
+  "name": "@conflux-dev/jsdoc-tsimport-plugin",
   "version": "1.0.5",
   "description": "A JSDoc plugin to support the typescript module import syntax.",
   "main": "index.js",

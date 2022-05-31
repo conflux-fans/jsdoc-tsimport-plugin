@@ -227,8 +227,26 @@ function jsdocCommentFound(e) {
   });
 }
 
+/**
+ * @param {object} e 
+ * @param {string} e.filename
+ * @param {string} e.source
+ * @returns {string}
+ */
+function replaceImport(e) {
+  return e.source.replace(docCommentsRegex,
+    (substring) => {
+      return substring.replace(importRegex,
+        (_substring2, relImportPath, symbolName) => {
+        const moduleId = getModuleId(e.filename, relImportPath);
+        return (moduleId) ? `module:${moduleId}${symbolName?"~"+symbolName:""}` : symbolName;
+      });
+    });
+}
+
 
 exports.handlers = {
   beforeParse: beforeParse,
   jsdocCommentFound: jsdocCommentFound,
+  replaceImport: replaceImport,
 };
